@@ -30,7 +30,7 @@ SECRET_KEY = env('APP_SECRET_KEY', default='for_development_only')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['news-vnexpress-api.herokuapp.com']
 
 
 # Application definition
