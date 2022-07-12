@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('APP_SECRET_KEY')
+SECRET_KEY = env('APP_SECRET_KEY', default='for_development_only')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -92,10 +92,10 @@ DATABASES = {
     # },
     'default': {
         'ENGINE': 'djongo',
-        'NAME': env('DB_NAME'),
+        'NAME': env('DB_NAME', default='development'),
         'ENFORCE_SCHEMA': False,
         'CLIENT' : {
-            'host': env('DB_URI'),
+            'host': env('DB_URI', default='development'),
         }
         # 'HOST': 'mongodb+srv://vnExpress_news_clone_user1:2oDAp3epHL0Rb7of@accounts.se1cj.gcp.mongodb.net/VnExpress_Clone?retryWrites=true&w=majority',
         
