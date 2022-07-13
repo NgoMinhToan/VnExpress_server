@@ -3,19 +3,6 @@ from vnexpressAPI.models import News, Media, NewsCategory, detail_news
 import re
 import unidecode
 
-# import setting
-from src.settings import TYPE_SERVER
-# from datetime import datetime
-
-# def to_timestamp(text, format='%Y-%m-%dT%H:%M:%S'):
-#     return int(datetime.timestamp(datetime.strptime(text.split('.')[0], format)))
-import time
-# Run in update_news server only
-def auto_update_news():
-    while True:
-        update_news()
-        print('Sleep for 10 minutes!')
-        time.sleep(600)
 
 def to_url_param(text):
     if type(text)==str:
@@ -67,6 +54,14 @@ def update_news():
     for news in all_news:
         save_news(news)
 
+def big_update_news():
+    print('Crawl data!')
+    all_news = crawl_news.crawl_top_express_news()
+    
+    print('Updating!')
+    for news in all_news:
+        save_news(news)
+
 def refresh_top_news():
     delete_all_news()
     
@@ -76,8 +71,3 @@ def refresh_top_news():
     print('Saving!')
     for news in all_news:
         save_news(news)
-
-
-# For test server only
-if TYPE_SERVER == 'LOAD_DATA':
-    auto_update_news()

@@ -43,10 +43,47 @@ def crawl_top_express_news():
     all_news = []
     urls = ['https://vnexpress.net/tin-tuc-24h', 'https://vnexpress.net/tin-tuc-24h-p2', 'https://vnexpress.net/tin-tuc-24h-p3']
     for url in urls:
-        soup = BeautifulSoup(requests.get(url).content, "html.parser")
+        try:
+            soup = BeautifulSoup(requests.get(url).content, "html.parser")
+            
+            container = soup.findAll('article', class_='item-news')
+            for item in container:
+                try:
+                    content = item.find('h3', class_='title-news')
+                    if content==None:
+                        continue
+                    title = content.find('a').attrs['title']
+                    link = content.find('a').attrs['href']
+                    datetime = item.find('span', class_='time-ago') and item.find('span', class_='time-ago').attrs['datetime'] or None
+                    all_news.append({
+                        'title': title,
+                        'link': link,
+                        'datetime': datetime
+                    })
+                except:
+                    pass
+        except:
+            pass
+    
+    final_result = []
+    for news in all_news:
+        try:
+            news['detail'] = news_detail(news['link'])
+            final_result.append(news)
+        except:
+            pass
         
-        container = soup.findAll('article', class_='item-news')
-        for item in container:
+    return final_result
+
+def update_vnexpress_news():
+    all_news = []
+    url= 'https://vnexpress.net/tin-tuc-24h'
+    
+    soup = BeautifulSoup(requests.get(url).content, "html.parser")
+    
+    container = soup.findAll('article', class_='item-news')
+    for item in container:
+        try:
             content = item.find('h3', class_='title-news')
             if content==None:
                 continue
@@ -58,36 +95,18 @@ def crawl_top_express_news():
                 'link': link,
                 'datetime': datetime
             })
+        except:
+            pass
         
+    final_result = []
     for news in all_news:
-        news['detail'] = news_detail(news['link'])
+        try:
+            news['detail'] = news_detail(news['link'])
+            final_result.append(news)
+        except:
+            pass
         
-    return all_news
-
-def update_vnexpress_news():
-    all_news = []
-    url= 'https://vnexpress.net/tin-tuc-24h'
-    
-    soup = BeautifulSoup(requests.get(url).content, "html.parser")
-    
-    container = soup.findAll('article', class_='item-news')
-    for item in container:
-        content = item.find('h3', class_='title-news')
-        if content==None:
-            continue
-        title = content.find('a').attrs['title']
-        link = content.find('a').attrs['href']
-        datetime = item.find('span', class_='time-ago') and item.find('span', class_='time-ago').attrs['datetime'] or None
-        all_news.append({
-            'title': title,
-            'link': link,
-            'datetime': datetime
-        })
-        
-    for news in all_news:
-        news['detail'] = news_detail(news['link'])
-        
-    return all_news
+    return final_result
 
 
 
