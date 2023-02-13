@@ -35,7 +35,7 @@ def news_detail(link):
         media = [{'alt': f.find('img').attrs['alt'], 'src': 'data-src' in f.find('img').attrs and f.find('img').attrs['data-src'] or f.find('img')['src']} for f in article.findAll('figure') if f.find('img')!=None]
         if len(content)==0 and len(media)==0:
             news_type = 'video'
-    raw_body = str(article)
+    raw_body = 'str(article)'
 
     return {'news_type': news_type, 'category': category, 'title': title, 'location': location, 'description': desc_text, 'content': content, 'author': author, 'media': media, 'raw_body': raw_body}
 
