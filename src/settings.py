@@ -30,7 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'news-vnexpress-api.herokuapp.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    '.vercel.app'
 ]
 
 
