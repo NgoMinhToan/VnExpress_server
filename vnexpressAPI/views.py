@@ -62,7 +62,7 @@ def init_news_api(request):
 
 def cron(request):
     host = request.headers.get('Host')
-    return JHttpResponseRedirect(redirect_to=host + '/update_news')
+    return HttpResponseRedirect(redirect_to=host + '/update_news')
     # sonResponse({
     #     'message': 'News have been update!'
     # }, status=status.HTTP_200_OK)
