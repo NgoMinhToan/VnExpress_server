@@ -82,6 +82,7 @@ def update_vnexpress_news():
     soup = BeautifulSoup(requests.get(url).content, "html.parser")
     
     container = soup.findAll('article', class_='item-news')
+    container = container[:10]
     for item in container:
         try:
             content = item.find('h3', class_='title-news')
