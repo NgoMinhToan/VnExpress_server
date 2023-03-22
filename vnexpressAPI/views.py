@@ -5,7 +5,7 @@ from dateutil import tz
 import re
 # Create your views here.
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
 from rest_framework import status
@@ -61,12 +61,11 @@ def init_news_api(request):
     }, status=status.HTTP_200_OK)
 
 def cron(request):
-    print(request)
     host = request.headers.get('Host')
-    request.get(host + '/update_news')
-    return JsonResponse({
-        'message': 'News have been update!'
-    }, status=status.HTTP_200_OK)
+    return JHttpResponseRedirect(redirect_to=host + '/update_news')
+    # sonResponse({
+    #     'message': 'News have been update!'
+    # }, status=status.HTTP_200_OK)
     
 
 def update_news_api(request):
