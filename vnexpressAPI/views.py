@@ -10,7 +10,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-
+from asgiref.sync import sync_to_async
 
 # from models import News
 from vnexpressAPI.models import News, NewsCategory, detail_news
@@ -66,8 +66,7 @@ def cron(request):
     
 
 async def update_news_api(request):
-    t = asyncio.ensure_future(update_news())
-    await asyncio.gather(t)
+    await sync_to_async(update_news, thread_sensitive=True)(pk=123)
     # await update_news()
     return JsonResponse({
         'message': 'News have been update!'
