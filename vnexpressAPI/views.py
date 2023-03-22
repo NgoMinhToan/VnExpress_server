@@ -66,7 +66,7 @@ def cron(request):
     
 
 async def update_news_api(request):
-    await sync_to_async(update_news, thread_sensitive=True)(pk=123)
+    await sync_to_async(update_news, thread_sensitive=True)()
     # await update_news()
     return JsonResponse({
         'message': 'News have been update!'
