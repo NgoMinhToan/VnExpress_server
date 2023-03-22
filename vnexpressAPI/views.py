@@ -65,9 +65,8 @@ def cron(request):
     return HttpResponseRedirect(redirect_to='/update_news')
     
 
-async def update_news_api(request):
-    await sync_to_async(update_news, thread_sensitive=True)()
-    # await update_news()
+def update_news_api(request):
+    update_news()
     return JsonResponse({
         'message': 'News have been update!'
     }, status=status.HTTP_200_OK)
