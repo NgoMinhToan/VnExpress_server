@@ -2,7 +2,7 @@ from vnexpressAPI.crawl_data import crawl_news
 from vnexpressAPI.models import News, Media, NewsCategory, detail_news
 import re
 import unidecode
-
+from asgiref.sync import sync_to_async
 
 def to_url_param(text):
     if type(text)==str:
@@ -46,7 +46,7 @@ def save_news(news):
         detail=detail_instance
     )
 
-def update_news():
+async def update_news():
     print('Crawl data!')
     all_news = crawl_news.update_vnexpress_news()
     
