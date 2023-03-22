@@ -49,7 +49,7 @@ def save_news(news):
 
 async def update_news():
     print('Crawl data!')
-    await asyncio.sleep(5)
+    await asyncio.sleep(1000)
     all_news = crawl_news.update_vnexpress_news()
     
     print('Updating!')
