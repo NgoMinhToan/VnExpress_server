@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from asgiref.sync import sync_to_async
 
 # from models import News
 from vnexpressAPI.models import News, NewsCategory, detail_news
@@ -61,15 +62,12 @@ def init_news_api(request):
     }, status=status.HTTP_200_OK)
 
 def cron(request):
-    host = request.headers.get('Host')
     return HttpResponseRedirect(redirect_to='/update_news')
-    # sonResponse({
-    #     'message': 'News have been update!'
-    # }, status=status.HTTP_200_OK)
     
 
 def update_news_api(request):
-    update_news()
+    sync_to_async(update_news, thread_sensitive=True)(pk=123)
+    # update_news()
     return JsonResponse({
         'message': 'News have been update!'
     }, status=status.HTTP_200_OK)
