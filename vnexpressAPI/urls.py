@@ -5,6 +5,7 @@ urlpatterns = [
     path('news/<int:from_>/<int:to>/', views.getListNews),
     # path('news/<str:pk>', views.UpdateDeleteNewsView.as_view()),
     path('init_news', views.init_news_api),
+    path('cron', views.cron),
     path('update_news', views.update_news_api),
     path('delete_news', views.delete_news_api),
     path('getNews/<str:news_url_param>', views.getNews),

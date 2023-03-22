@@ -17,7 +17,7 @@
     ],
     "crons": [
         {
-            "path": "/update_news",
+            "path": "/cron",
             "schedule": "0 10 * * *"
         }
     ]

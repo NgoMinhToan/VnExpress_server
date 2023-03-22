@@ -60,6 +60,15 @@ def init_news_api(request):
         'message': 'Refresh top news successful!'
     }, status=status.HTTP_200_OK)
 
+def cron(request):
+    print(request)
+    host = request.headers.get('Host')
+    request.get(host + '/update_news')
+    return JsonResponse({
+        'message': 'News have been update!'
+    }, status=status.HTTP_200_OK)
+    
+
 def update_news_api(request):
     update_news()
     return JsonResponse({
