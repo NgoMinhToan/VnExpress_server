@@ -1,12 +1,12 @@
 import time
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from dateutil import tz
+import asyncio
 import re
 # Create your views here.
 
 from django.http import JsonResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
 
 from rest_framework import status
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
@@ -66,7 +66,9 @@ def cron(request):
     
 
 async def update_news_api(request):
-    update_news()
+    t = asyncio.ensure_future(update_news())
+    await asyncio.gather(t)
+    # await update_news()
     return JsonResponse({
         'message': 'News have been update!'
     }, status=status.HTTP_200_OK)

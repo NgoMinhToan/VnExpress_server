@@ -1,4 +1,5 @@
 from vnexpressAPI.crawl_data import crawl_news
+import asyncio
 from vnexpressAPI.models import News, Media, NewsCategory, detail_news
 import re
 import unidecode
@@ -47,6 +48,7 @@ def save_news(news):
     )
 
 async def update_news():
+    await asyncio.sleep(1)
     print('Crawl data!')
     all_news = crawl_news.update_vnexpress_news()
     
