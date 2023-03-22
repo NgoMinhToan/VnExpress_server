@@ -66,7 +66,8 @@ def cron(request):
     
 
 async def update_news_api(request):
-    await update_news()
+    t = asyncio.ensure_future(update_news())
+    asyncio.gather(t)
     # await update_news()
     return JsonResponse({
         'message': 'News have been update!'
