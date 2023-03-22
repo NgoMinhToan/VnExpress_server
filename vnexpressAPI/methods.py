@@ -47,9 +47,8 @@ def save_news(news):
         detail=detail_instance
     )
 
-async def update_news():
+def update_news():
     print('Crawl data!')
-    await asyncio.sleep(1000)
     all_news = crawl_news.update_vnexpress_news()
     
     print('Updating!')
