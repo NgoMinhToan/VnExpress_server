@@ -1,1 +1,1 @@
-* * * * * sh /app/update_news.sh
+*/10 * * * * sh /app/update_news.sh
