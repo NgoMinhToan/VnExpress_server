@@ -1,0 +1,1 @@
+python /app/manage.py auto_update_news small
