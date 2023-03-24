@@ -29,9 +29,7 @@ SECRET_KEY = env('APP_SECRET_KEY', default='for_development_only')
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'news-vnexpress-api.herokuapp.com',
-    '127.0.0.1',
-    '.vercel.app'
+    '*'
 ]
 
 
