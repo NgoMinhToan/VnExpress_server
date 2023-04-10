@@ -16,6 +16,6 @@ RUN pip install -r requirements.txt
 # RUN crontab /etc/cron.d/cron_task
 # RUN python manage.py migrate
 
-ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT [ "python", "manage.py", "runserver", "8000"]
 
 EXPOSE 8000
