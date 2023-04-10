@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . /app
 COPY Docker_Requirement/server_env.env /app/src/.env
 # COPY Docker_Requirement/crawl_news.py /app/vnexpressAPI/crawl_data/crawl_news.py
+ENV PYTHONUNBUFFERED=1
 
 RUN pip install -r requirements.txt
 
