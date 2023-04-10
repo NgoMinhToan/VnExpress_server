@@ -6,6 +6,7 @@ COPY . /app
 COPY Docker_Requirement/server_env.env /app/src/.env
 # COPY Docker_Requirement/crawl_news.py /app/vnexpressAPI/crawl_data/crawl_news.py
 ENV PYTHONUNBUFFERED=1
+ENV PORT=8000
 
 RUN pip install -r requirements.txt
 
@@ -16,6 +17,6 @@ RUN pip install -r requirements.txt
 # RUN crontab /etc/cron.d/cron_task
 # RUN python manage.py migrate
 
-ENTRYPOINT [ "python", "manage.py", "runserver", "8000"]
+ENTRYPOINT python manage.py runserver 0.0.0.0:$PORT
 
-EXPOSE 8000
+EXPOSE $PORT
