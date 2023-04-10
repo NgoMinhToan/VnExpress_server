@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 COPY Docker_Requirement/server_env.env /app/src/.env
-COPY Docker_Requirement/crawl_news.py /app/vnexpressAPI/crawl_data/crawl_news.py
+# COPY Docker_Requirement/crawl_news.py /app/vnexpressAPI/crawl_data/crawl_news.py
 
 RUN pip install -r requirements.txt
 
@@ -15,7 +15,6 @@ RUN chmod +x update_news.sh
 RUN crontab /etc/cron.d/cron_task
 
 # RUN python manage.py migrate
-# CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
-ENTRYPOINT [ "crond", "-f" ]
+ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 EXPOSE 8000
